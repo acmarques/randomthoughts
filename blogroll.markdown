@@ -1,4 +1,4 @@
-### About HowToNode.org
+### Blog Roll
 
 HowToNode.org is a community supported blog created by [Tim Caswell][]. The purpose of the blog is to teach how to do various tasks in [node.js][] as well as teach fundamental concepts that are needed to write effective code.
 

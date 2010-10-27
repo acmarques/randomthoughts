@@ -245,7 +245,6 @@ the list items to fix the size issue */
   font-size: 18px;
   font-weight: bold;
   line-height: 1em;
-  border-bottom: 1px solid #aaa;
 }
 #sidebar dt {
   font-weight: bold;
@@ -316,7 +315,7 @@ the list items to fix the size issue */
   text-decoration: underline;
 }
 #sidebar .bubble {
-  margin: 20px 0 0 10px;
+  margin: 0px 0 20px 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -340,7 +339,6 @@ the list items to fix the size issue */
   color: #eaeeff;
   margin: -9px -9px 10px -9px;
   padding: 9px 10px 8px 10px;
-  border-bottom: 1px solid #aaa;
 }
 #sidebar .sponsor {
   padding: 20px 10px 10px 20px;

@@ -12,10 +12,8 @@
       %a{href: "/" + article.name} Read more...
 
 #sidebar
-  .aside
-    = markdownEncode(description)
   .bubble
-    %h4
+    %h3
       Articles
     %ul
       :each article in articles.slice(0,20)
@@ -24,6 +22,34 @@
           &=" by " + article.author.name
           :if article.node
             %span.versiontag&= article.node
-  .bubble= markdownEncode(description)
-  %a.sponsor{href:"http://mediatemple.net/"}
-    %img{src:"mtbadge.jpg", alt:"(mt) mediatemple", title:"Hosting donated by Media Temple"}
+  .bubble{style: "background: #E8E8E8 !important"}
+    :script
+      new TWTR.Widget({
+        version: 2,
+        type: 'profile',
+        rpp: 4,
+        interval: 6000,
+        width: 300,
+        height: 300,
+        theme: {
+          shell: {
+            background: '#e8e8e8',
+            color: '#3e3e3e'
+          },
+          tweets: {
+            background: '#ffffff',
+            color: '#000000',
+            links: '#21749b'
+          }
+        },
+        features: {
+          scrollbar: false,
+          loop: false,
+          live: false,
+          hashtags: true,
+          timestamp: true,
+          avatars: false,
+          behavior: 'all'
+        }
+      }).render().setUser('acmarques').start();
+  .bubble= markdownEncode(blogroll)
