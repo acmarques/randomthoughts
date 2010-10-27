@@ -2,7 +2,6 @@
   :each article in articles.slice(0,15)
     .article
       .author
-        %img{src:gravitar(article.author.email, 30)}
         By #{article.author.name}
         .date{title: article.date}&= formatDate(article.date, "%Y.%m.%d")
       %h3{style: "margin-right: 150px"}
@@ -51,5 +50,16 @@
           avatars: false,
           behavior: 'all'
         }
-      }).render().setUser('acmarques').start();
-  .bubble= markdownEncode(blogroll)
+      }).render().setUser('acmarques').start();      
+  .bubble
+    %h3
+      Links
+    %ul
+      %li
+        %a{href: "http://www.locaweb.com.br" }Locaweb
+  .bubble
+    %h3
+      Blogs
+    %ul
+      %li
+        %a{href: "http://www.akitaonrails.com.br" }AkitaOnRails
