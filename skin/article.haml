@@ -9,9 +9,9 @@
   %hr{style:"clear:both"}
   #disqus_thread.body
   :script
-    var disqus_url = "http://blog.acmarques.com/#{article.name}";
-  %script(src="http://disqus.com/forums/acmarques/embed.js" type="text/javascript")
-  %a(href="http://disqus.com/forums/acmarques/?url=ref")
+    var disqus_url = "http://blog.acmarques.com/";
+  %script(src="http://disqus.com/forums/acmarques-random-thoughts/embed.js" type="text/javascript")
+  %a(href="http://disqus.com/forums/acmarques-random-thoughts/?url=ref")
     View the discussion thread.
   %a.dsq-brlink(href="http://disqus.com")
     blog comments powered by
@@ -26,9 +26,8 @@
           query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&amp;';
         }
       }
-      document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/acmarques/get_num_replies.js' + query + '"></' + 'script>');
+      document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/acmarques-random-thoughts/get_num_replies.js' + query + '"></' + 'script>');
     })();
-
 
 #sidebar
   :if article.categories != undefined
@@ -74,4 +73,14 @@
       Links
     %ul
       %li
-        %a{href: "http://www.locaweb.com.br" }Locaweb      
+        %a{href: "http://www.locaweb.com.br" }Locaweb    
+        
+:script
+  var disqus_shortname = 'acmarques-random-thoughts';
+  (function () {
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'http://disqus.com/forums/acmarques-random-thoughts/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+
+          
