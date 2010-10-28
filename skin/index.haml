@@ -13,14 +13,12 @@
 #sidebar
   .bubble
     %h3
-      Articles
+      Categories
     %ul
-      :each article in articles.slice(0,20)
+      :each category in categories
         %li
-          %a{href: "/" + article.name}&=article.title
-          &=" by " + article.author.name
-          :if article.node
-            %span.versiontag&= article.node
+          %a{href: "/category/" + category }&= category
+             
   .bubble{style: "background: #E8E8E8 !important"}
     :script
       new TWTR.Widget({
@@ -53,13 +51,14 @@
       }).render().setUser('acmarques').start();      
   .bubble
     %h3
+      Articles
+    %ul
+      :each article in articles.slice(0,20)
+        %li
+          %a{href: "/" + article.name}&=article.title  
+  .bubble
+    %h3
       Links
     %ul
       %li
         %a{href: "http://www.locaweb.com.br" }Locaweb
-  .bubble
-    %h3
-      Blogs
-    %ul
-      %li
-        %a{href: "http://www.akitaonrails.com.br" }AkitaOnRails

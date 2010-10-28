@@ -48,7 +48,7 @@ body {
   font-size: 13px;
   line-height: 1em;
   text-align: center;
-  color: #fff;
+  color: #aaa;
   font-family: sans-serif;
   padding: 20px 0;
 }
@@ -176,13 +176,14 @@ body {
 #main h1,
 #main h2,
 #main h3,
-#main h4,
+#main h3,
 #main h5 {
   font-family: sans-serif;
   margin: .5em 0;
 }
 #main h1 {
   color: #222;
+  margin:0.5em 0 0.3em 0
 }
 #main h2 {
   margin-top: 20px;
@@ -198,6 +199,13 @@ body {
 }
 #main h4 {
   color: #666;
+}
+
+#main h5{
+	border-bottom: 1px solid #DDDDDD;
+	color: #444;
+	margin-bottom: 20px;
+	font-size: 12px;
 }
 /* Added the default paragraph style to
 the list items to fix the size issue */
