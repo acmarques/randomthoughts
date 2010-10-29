@@ -35,7 +35,7 @@
       %h3
         Categories
       %ul
-        :each category in article.categories.split(',')
+        :each category in article.categories
           %li
             %a{href: "/category/" + category.trim() }&= category.trim()
   .bubble{style: "background: #E8E8E8 !important"}
