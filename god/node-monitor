@@ -1,0 +1,54 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:		node-monitor
+# Required-Start:	$syslog $remote_fs
+# Required-Stop:	$syslog $remote_fs
+# Should-Start:		$local_fs
+# Should-Stop:		$local_fs
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	God is process monitor used to restart node
+# Description:		God is process monitor used to restart node
+### END INIT INFO
+
+APP_ROOT=/home/randomthoughts/blog
+
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/var/lib/gems/1.8/bin
+DAEMON=/usr/bin/god
+DAEMON_ARGS="-c $APP_ROOT/god/node.god"
+NAME=node-monitor
+DESC=node-monitor
+PIDFILE=/var/run/node-monitor.pid
+
+test -x $DAEMON || exit 0
+test -x $DAEMONBOOTSTRAP || exit 0
+
+set -e
+
+case "$1" in
+  start)
+		echo -n "Starting $DESC: "
+	  $DAEMON $DAEMON_ARGS -P /var/run/god.pid -l /var/log/god.log
+	  RETVAL=$?
+	  echo "God started"
+	;;
+  stop)
+		echo -n "Stopping $DESC: "
+	  kill `cat /var/run/god.pid`
+	  kill `ps -e -o pid,command | grep node -m 1 | awk '{ print $1; }'`
+	  RETVAL=$?
+	  echo "God stopped"
+	;;
+
+  restart|force-reload)
+	${0} stop
+	${0} start
+	;;
+  *)
+	echo "Usage: /etc/init.d/$NAME {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
