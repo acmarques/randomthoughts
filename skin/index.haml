@@ -17,7 +17,7 @@
     %ul
       :each category in categories
         %li
-          %a{href: "/category/" + category }&= category
+          %a{href: "/category/" + category }&= unescape(category)
              
   .bubble{style: "background: #E8E8E8 !important"}
     :script
@@ -61,4 +61,6 @@
       Links
     %ul
       %li
-        %a{href: "http://www.locaweb.com.br" }Locaweb
+        %a{href: "http://www.locawebers.com.br/" }Locawebers
+      %li
+        %a{href: "http://howtonode.org" }How to Node        

@@ -13,6 +13,7 @@
   %script(src="http://disqus.com/forums/acmarques-random-thoughts/embed.js" type="text/javascript")
   %a(href="http://disqus.com/forums/acmarques-random-thoughts/?url=ref")
     View the discussion thread.
+  %br  
   %a.dsq-brlink(href="http://disqus.com")
     blog comments powered by
     %span.logo-disqus
@@ -37,7 +38,7 @@
       %ul
         :each category in article.categories
           %li
-            %a{href: "/category/" + category.trim() }&= category.trim()
+            %a{href: "/category/" + category }&= unescape(category)
   .bubble{style: "background: #E8E8E8 !important"}
     :script
       new TWTR.Widget({
