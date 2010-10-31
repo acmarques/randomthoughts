@@ -4,11 +4,11 @@ Date: Sun Oct 31 2010 12:38:25 GMT-0700 (PDT)
 Node: v0.2.4
 Categories: nodejs, nginx, god
 
-This article explains how to set up a server to host [node.js][] applications. As node.js processes can't be run as daemons - except by using [Upstart][], which by now is stable only for Ubuntu; [more info here][] - the idea is to use a web server ([nginx][]) to proxy connections to the node.js process and [God][] to manage and monitor the node.js process running the application.  
+This article explains how to set up a server to host [node.js][] applications. As node.js processes can't be run as daemons - except by using [Upstart][], which is by now only stable on Ubuntu; [more info here][] - the idea is to use [God][] to manage and monitor the node.js process running the application and [nginx][] as a reverse proxy.  
 
 I'll use a Debian Lenny 5.0 VM in this article, but the steps performed and packages required should be similar in other distros.
 
-Lets start by creating a simple application. Edit `/var/www/apps/hello_world.js` and paste in the _Hello World_ app.
+Let's start by creating a simple application. Edit `/var/www/apps/hello_world.js` and paste in the _Hello World_ app.
 
     var http = require("http");
     http.createServer(function (request, response) {
@@ -41,7 +41,7 @@ Then check if it is working correctly:
     node -v
     => v0.2.4
 
-## Configuring Nginx to proxy requests
+## Configuring Nginx
 
 Create the nginx virtual host file in `/etc/nginx/sites-available/helloworld` and paste in the following configuration:
 
@@ -74,25 +74,10 @@ Next create a symlink to enable this virtual host:
     
 And then run `/etc/init.d/nginx restart`. 
 
-## Trying things out - pt. 1
-
-You can now check if your virtual host is working as expected by starting up your node.js app and trying to access it through nginx.
-Let's first run the _Hello World_ app:
-
-    cd /var/www/apps/
-    node hello_world.js
-
-Now if you access __http://www.helloworld.com__ (remember to include it in your `/etc/hosts`) your should see the __Hello World__ page!
-If you don't, review the previous steps and try to figure out what went wrong. Don't go any further without making this work!
-
-Now that nginx is working correctly, we need to configure [God][] to monitor the Node.js process.
-
 
 ## God
 
-_[God][] is an easy to configure, easy to extend monitoring framework written in Ruby_. 
-
-It is distributed as a ruby gem, so before installing God we need to install [RubyGems][]:
+[God][] is an monitoring framework written in Ruby. It is distributed as a ruby gem, so before installing God we need to install [RubyGems][]:
 
     cd /usr/local
     wget http://rubyforge.org/frs/download.php/70696/rubygems-1.3.7.tgz
@@ -110,14 +95,14 @@ Then check if it is working correctly:
     
 #### God configuration file
 
-God requires one (or more) configuration file(s) to work. This configuration file tells God what is the process to monitor, what are the commands to start and stop the process, and in which situations God should restart the process.  
-The following configuration file tells God to restart the Node process if:
+God requires one (or more) configuration file(s) to work. Each configuration file tells God which process to monitor, what are the commands to start and stop the process, and in which situations God should restart it.  
+The following configuration file tells God to restart the Node.js process if:
 
   - it crashes
   - memory usage gets above 100 Mb
   - CPU usage gets above 50%  
   
-Now it's time to edit `/var/www/god/node.god` and paste in the following snippet.
+Edit `/var/www/apps/god/node.god` and paste in the following snippet:
 
     app_root  = "/var/www/apps/"
 
@@ -167,28 +152,14 @@ Now it's time to edit `/var/www/god/node.god` and paste in the following snippet
       end
 
     end
-   
-## Trying things out - pt. 2  
 
-Now let's check if God is correctly configured to monitor the Hello World app. In the shell, type:
-
-    sudo god -c /var/www/god/node-monitor -D
-
-And check the log messages.  
-
-God should be running as well as the Hello World app, that has been started by God. To test if God is correctly monitoring the node.js process, try killing it to check if God respawns it automatically:
-
-    kill `ps -e -o pid,command | grep node -m 1 | awk '{ print $1; }'`
-
-If the node.js process is still running, God is correctly monitoring! Nice!
-
-## Last details
+## Startup script
   
-To finish this configuration, let's just add an initialization script to start God in the server's startup.    
+To finish the configuration, add an init script to start God in the server's startup.    
 
 Edit `/etc/init.d/node-monitor` and paste in the following:
 
-    APP_ROOT=/var/www/
+    APP_ROOT=/var/www/apps
 
     PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/var/lib/gems/1.8/bin
     DAEMON=/usr/bin/god
@@ -229,12 +200,16 @@ Edit `/etc/init.d/node-monitor` and paste in the following:
 
     exit 0
     
-And then configure the service to start in the machine boot:    
+Then configure the service to start in the machine boot:    
     
     update-rc.d /etc/init.d/node-monitor defaults    
     
 
-Thats all, now you have a stable node.js production environment. This is the setup I use in this blog, and by now I'm very satisfied. Any suggestions or thougts are welcome, please leave a comment!
+## Conclusions
+
+Now you should have a stable node.js production environment. This is exactly the setup I use in this blog, God seems very stable and by now I'm satisfied. It may look awkward in the beggining, but this configuration is actually flexible and allows interesting setups like running multiple node.js instances, monitoring them with a single God instance and load balancing them with nginx.  
+
+Any suggestions or thoughts, please leave your comment!
 
 [node.js]: http://nodejs.org/
 [nginx]: http://nginx.org/
