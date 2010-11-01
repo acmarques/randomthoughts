@@ -9,6 +9,17 @@
     %link(rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/feed.xml")
     %link(href="/favicon.ico" rel="icon" type="image/x-icon")
     %script(type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js")
+    %script
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19449944-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
   %body
     #container
       #header
