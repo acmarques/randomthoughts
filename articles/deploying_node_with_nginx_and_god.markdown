@@ -99,7 +99,7 @@ God requires one (or more) configuration file(s) to work. Each configuration fil
 The following configuration file tells God to restart the Node.js process if:
 
   - it crashes
-  - memory usage gets above 100 Mb
+  - memory usage gets above 100 MB
   - CPU usage gets above 50%  
   
 Edit `/var/www/apps/god/node.god` and paste in the following snippet:
