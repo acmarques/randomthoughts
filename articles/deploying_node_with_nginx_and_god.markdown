@@ -81,6 +81,7 @@ And then run `/etc/init.d/nginx restart`.
 
     cd /usr/local
     wget http://rubyforge.org/frs/download.php/70696/rubygems-1.3.7.tgz
+    tar -zxvf rubygems-1.3.7.tgz
     cd rubygems-1.3.7/
     ruby setup.rb 
 
@@ -202,7 +203,8 @@ Edit `/etc/init.d/node-monitor` and paste in the following:
     
 Then configure the service to start in the machine boot:    
     
-    update-rc.d /etc/init.d/node-monitor defaults    
+    cd /etc/init.d
+    update-rc.d node-monitor defaults    
     
 
 ## Conclusions
