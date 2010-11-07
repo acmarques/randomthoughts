@@ -377,3 +377,22 @@ html[xmlns] .clearfix {
 * html .clearfix {
   height: 1%;
 }
+
+#searchform_top_text{
+  -moz-border-radius:4px 4px 4px 4px;
+  background:none repeat scroll 0 0 #F9F9F9;
+  border:1px solid #888;
+  color:#333333;
+  font-size:13px;
+  padding:4px 10px;
+  width:200px;
+}
+
+#search_submit{
+  -moz-border-radius: 4px 4px 4px 4px;
+  background: none repeat scroll 0 0 #E8E8E8;
+  border: 1px solid #888;
+  color: #333333;
+  padding: 4px 10px;
+  margin: 0px 6px;
+}

@@ -10,15 +10,16 @@
         = intro(article.markdown)
       %a{href: "/" + article.name} Read more...
 
-#sidebar
+#sidebar          
   .bubble
     %h3
-      Categories
-    %ul
-      :each category in categories
-        %li
-          %a{href: "/category/" + category }&= unescape(category)
-             
+      Search
+    %form{method: 'get', id: 'sform', action: 'http://www.google.com/search'}
+      %input{type: 'hidden', name: 'sitesearch', value: 'http://blog.acmarques.com'}
+      %div
+        %input{type:"text", name:"q", id:"searchform_top_text", onclick:"this.value='';"}
+        %input{type:"submit", id:"search_submit", value: 'Go'}
+
   .bubble{style: "background: #E8E8E8 !important"}
     :script
       new TWTR.Widget({
@@ -48,7 +49,16 @@
           avatars: false,
           behavior: 'all'
         }
-      }).render().setUser('acmarques').start();      
+      }).render().setUser('acmarques').start();     
+
+  .bubble
+    %h3
+      Categories
+    %ul
+      :each category in categories
+        %li
+          %a{href: "/category/" + category }&= unescape(category)
+       
   .bubble
     %h3
       Articles
