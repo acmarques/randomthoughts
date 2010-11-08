@@ -379,7 +379,9 @@ html[xmlns] .clearfix {
 }
 
 #searchform_top_text{
-  -moz-border-radius:4px 4px 4px 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;  
   background:none repeat scroll 0 0 #F9F9F9;
   border:1px solid #888;
   color:#333333;
@@ -389,7 +391,9 @@ html[xmlns] .clearfix {
 }
 
 #search_submit{
-  -moz-border-radius: 4px 4px 4px 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;  
   background: none repeat scroll 0 0 #E8E8E8;
   border: 1px solid #888;
   color: #333333;

@@ -1,6 +1,6 @@
 Title: Deploying Node.js apps with Nginx and God
 Author: Antonio Marques
-Date: Sun Oct 31 2010 12:38:25 GMT-0700 (PDT)
+Date: Sun Oct 31 2010 12:38:25 GMT-0300 (PDT)
 Node: v0.2.4
 Categories: nodejs, nginx, god
 
